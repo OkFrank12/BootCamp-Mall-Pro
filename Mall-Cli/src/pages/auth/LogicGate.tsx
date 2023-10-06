@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import image from "../../assets/istockphoto-1338265862-612x612-removebg-preview.png";
 
 const LogicGate = () => {
@@ -14,9 +15,11 @@ const LogicGate = () => {
             settings
           </span>
           <br />
-          <button className="w-[300px] text-[dodgerblue] rounded-md py-3 bg-white shadow-md hover:scale-[1.03] transition-all duration-500">
-            Login as an Admin
-          </button>
+          <Link to={"/logic"}>
+            <button className="w-[300px] text-[dodgerblue] rounded-md py-3 bg-white shadow-md hover:scale-[1.03] transition-all duration-500">
+              Login as an Admin
+            </button>
+          </Link>
         </div>
         <br />
         <br />
@@ -26,9 +29,11 @@ const LogicGate = () => {
             operations and settings.
           </span>
           <br />
-          <button className="w-[300px] rounded-md py-3 bg-white shadow-md hover:scale-[1.03] transition-all duration-500 text-[dodgerblue]">
-            Login as an store owner
-          </button>
+          <Link to={`/register-owner`}>
+            <button className="w-[300px] rounded-md py-3 bg-white shadow-md hover:scale-[1.03] transition-all duration-500 text-[dodgerblue]">
+              Login as an store owner
+            </button>
+          </Link>
         </div>
         <br />
         <br />
@@ -38,9 +43,11 @@ const LogicGate = () => {
             assignments.
           </span>
           <br />
-          <button className="w-[300px] text-[dodgerblue] rounded-md py-3 bg-white shadow-md hover:scale-[1.03] transition-all duration-500">
-            Login as a dispatcher
-          </button>
+          <Link to={`/login-owner`}>
+            <button className="w-[300px] text-[dodgerblue] rounded-md py-3 bg-white shadow-md hover:scale-[1.03] transition-all duration-500">
+              Login as a dispatcher
+            </button>
+          </Link>
         </div>
       </div>
     </div>

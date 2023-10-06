@@ -3,7 +3,7 @@ import LogicGate from "../pages/auth/LogicGate";
 import RegisterOwner from "../pages/auth/RegisterOwner";
 import LoginOwner from "../pages/auth/LoginOwner";
 import HomePage from "../pages/home/HomePage";
-import Layout from "../pages/common/Layout";
+import LandingPage from "../pages/LandingPage";
 
 export const MainRouter = createBrowserRouter([
   {
@@ -20,12 +20,6 @@ export const MainRouter = createBrowserRouter([
   },
   {
     path: "/",
-    element: <Layout />,
-    children:[
-      {
-        index:true,
-        element:<HomePage/>
-      }
-    ]
+    element: <LandingPage />,
   },
 ]);
