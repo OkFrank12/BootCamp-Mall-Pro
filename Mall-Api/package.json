@@ -10,5 +10,8 @@
     "E-Commerce"
   ],
   "author": "Mall-Pro Team",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "prisma": "^5.2.0"
+  }
 }
