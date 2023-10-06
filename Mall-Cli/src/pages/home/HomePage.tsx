@@ -1,6 +1,12 @@
+import LandingPage from "../LandingPage"
+import Amazing from "./Amazing"
+
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <div>
+      <Amazing/>
+      <LandingPage/>
+    </div>
   )
 }
 
