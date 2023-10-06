@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 import { google } from "googleapis";
 import path from "path";
 import ejs from "ejs";
+import jwt from "jsonwebtoken";
 
 const baseUrl: string = "http://localhost:5000";
 
@@ -50,6 +51,77 @@ export const sendOwnerOpeningMail = async (account: any, token: string) => {
   }
 };
 
+export const sendAdminOpeningMail = async (account: any, tokenID: string) => {
+  try {
+    const accessToken: any = (await oAuth.getAccessToken()).token;
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        type: "OAuth2",
+        user: "cfoonyemmemme@gmail.com",
+        clientId: G_ID,
+        clientSecret: G_SECRET,
+        refreshToken: G_REFRESH,
+        accessToken,
+      },
+    });
+    const passedData = {
+      secretKey: account?.secretKey,
+      url: `${baseUrl}/api/admin/${tokenID}/verify-account-start`,
+    };
+
+    const locateFile = path.join(__dirname, "../views/adminMail.ejs");
+    const readMail = await ejs.renderFile(locateFile, passedData);
+
+    const mailer = {
+      from: "Aj Mall Admin <cfoonyemmemme@gmail.com>",
+      to: account?.email,
+      subject: "E-commerce Platform .#Step One",
+      html: readMail,
+    };
+
+    transporter.sendMail(mailer);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const sendAdminLastMail = async (account: any, tokenID: string) => {
+  try {
+    const accessToken: any = (await oAuth.getAccessToken()).token;
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        type: "OAuth2",
+        user: "cfoonyemmemme@gmail.com",
+        clientId: G_ID,
+        clientSecret: G_SECRET,
+        refreshToken: G_REFRESH,
+        accessToken,
+      },
+    });
+
+    const passedData = {
+      secretKey: account?.secretKey,
+      url: `${baseUrl}/api/admin/${tokenID}/verify-admin`,
+    };
+
+    const locateFile = path.join(__dirname, "../views/adminSecondMail.ejs");
+    const readMail = await ejs.renderFile(locateFile, passedData);
+
+    const mailer = {
+      from: "Aj Mall Admin <cfoonyemmemme@gmail.com>",
+      to: account?.email,
+      subject: "E-commerce Platform .#Final Step",
+      html: readMail,
+    };
+
+    transporter.sendMail(mailer);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const sendOwnerResetMail = async (account: any, token: string) => {
   try {
     const accessToken: any = (await oAuth.getAccessToken()).token;
@@ -67,6 +139,41 @@ export const sendOwnerResetMail = async (account: any, token: string) => {
 
     const passedData = {
       url: `${baseUrl}/api/${token}/reset-account-password`,
+    };
+
+    const locateFile = path.join(__dirname, "../views/resetMail.ejs");
+    const readMail = await ejs.renderFile(locateFile, passedData);
+
+    const mailer = {
+      from: "Aj Mall <cfoonyemmemme@gmail.com>",
+      to: account?.email,
+      subject: "E-commerce Platform .Reset",
+      html: readMail,
+    };
+
+    transporter.sendMail(mailer);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const sendAdminResetMail = async (account: any, token: string) => {
+  try {
+    const accessToken: any = (await oAuth.getAccessToken()).token;
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        type: "OAuth2",
+        user: "cfoonyemmemme@gmail.com",
+        clientId: G_ID,
+        clientSecret: G_SECRET,
+        refreshToken: G_REFRESH,
+        accessToken,
+      },
+    });
+
+    const passedData = {
+      url: `${baseUrl}/api/admin/${token}/reset-admin-password`,
     };
 
     const locateFile = path.join(__dirname, "../views/resetMail.ejs");

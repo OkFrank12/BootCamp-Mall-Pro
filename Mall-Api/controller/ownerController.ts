@@ -37,7 +37,7 @@ export const registerOwner = async (req: Request, res: Response) => {
       message: "Register Owner successfully",
       data: account,
     });
-  } catch (error) {
+  } catch (error: any) {
     return res.status(404).json({
       message: "error registering owner",
       data: error.message,
@@ -72,7 +72,7 @@ export const verifyOwner = async (req: Request, res: Response) => {
       message: "Verified Owner",
       data: account,
     });
-  } catch (error) {
+  } catch (error: any) {
     return res.status(404).json({
       message: "error verifying owner",
       data: error.message,
@@ -111,7 +111,7 @@ export const signInOwner = async (req: Request, res: Response) => {
         message: "User is not found 😒😒🤦‍♂️🤦‍♂️🤷‍♀️",
       });
     }
-  } catch (error) {
+  } catch (error: any) {
     return res.status(404).json({
       message: "error signing in owner",
       data: error.message,
@@ -127,7 +127,7 @@ export const viewAllStoreOwners = async (req: Request, res: Response) => {
       message: "viewing all store owner",
       data: allOwner,
     });
-  } catch (error) {
+  } catch (error: any) {
     return res.status(404).json({
       message: "error viewing all store owners",
       data: error.message,
@@ -146,10 +146,10 @@ export const viewingOneStoreOwner = async (req: Request, res: Response) => {
       message: `viewing one storeOwner: ${one?.owner}`,
       data: one,
     });
-  } catch (error) {
+  } catch (error: any) {
     return res.status(404).json({
       message: "error viewing one store owner",
-      data: error,
+      data: error.message,
     });
   }
 };
@@ -183,7 +183,7 @@ export const resetOwnerPassword = async (req: Request, res: Response) => {
         message: "Unauthorized to reset this password",
       });
     }
-  } catch (error) {
+  } catch (error: any) {
     return res.status(404).json({
       message: "error reseting password",
       data: error.message,
@@ -220,6 +220,7 @@ export const changeOwnerPassword = async (req: Request, res: Response) => {
         where: { id: owner.id },
         data: {
           password: hashed,
+          token: "",
         },
       });
 
@@ -231,9 +232,28 @@ export const changeOwnerPassword = async (req: Request, res: Response) => {
         message: "Can't change this password",
       });
     }
-  } catch (error) {
+  } catch (error: any) {
     return res.status(404).json({
       message: "error changing owner's password",
+      data: error.message,
+    });
+  }
+};
+
+export const deleteOwnerBio = async (req: Request, res: Response) => {
+  try {
+    const { accountID } = req.params;
+
+    const owner = await prisma.ownerModel.delete({
+      where: { id: accountID },
+    });
+
+    return res.status(201).json({
+      message: `Deleted ${owner.owner}`,
+    });
+  } catch (error: any) {
+    return res.status(404).json({
+      message: "error deleting owner bio",
       data: error.message,
     });
   }
