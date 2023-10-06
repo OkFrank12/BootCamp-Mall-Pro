@@ -1,0 +1,14 @@
+{
+  "name": "mall-api",
+  "version": "1.0.0",
+  "description": "I and my Team are working on our bootcamp e-commerce project in 24hrs",
+  "main": "index.js",
+  "scripts": {
+    "test": "ts-node-dev --respawn index.ts"
+  },
+  "keywords": [
+    "E-Commerce"
+  ],
+  "author": "Mall-Pro Team",
+  "license": "MIT"
+}
