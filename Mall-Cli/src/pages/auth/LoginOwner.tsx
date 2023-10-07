@@ -43,7 +43,7 @@ const LoginOwner = () => {
         const decode: any = jwtDecode(res);
         dispatch(ownerState(decode.id));
 
-        navigate("/");
+        navigate("/landing-page");
       } else {
         Swal.fire({
           position: "center",

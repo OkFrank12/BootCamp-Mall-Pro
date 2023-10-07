@@ -6,6 +6,7 @@ import helmet from "helmet";
 import { HTTP, mainError } from "./error/MainError";
 import { errorHandler } from "./error/ErrorBuilder";
 import admin from "./router/adminRouter";
+import store from "./router/storeRouter";
 
 export const mainApp = (app: Application) => {
   app.use(express.json()).use(cors()).set("view engine", "ejs");
@@ -15,6 +16,7 @@ export const mainApp = (app: Application) => {
 
   app.use("/api", owner);
   app.use("/api/admin", admin);
+  app.use("/api/store", store);
 
   app.get("/", (req: Request, res: Response) => {
     try {

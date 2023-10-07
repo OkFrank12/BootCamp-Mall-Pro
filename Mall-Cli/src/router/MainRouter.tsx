@@ -7,11 +7,22 @@ import ResetPassword from "../pages/auth/ResetPassword";
 import ChangePassword from "../pages/auth/ChangePassword";
 import MessagePage from "../pages/auth/MessagePage";
 import HomePage from "../pages/home/HomePage";
+import LayOut from "../components/common/LayOut";
 
 export const MainRouter = createBrowserRouter([
   {
     path: "/logic",
     element: <LogicGate />,
+  },
+  {
+    path: "/landing-page",
+    element: <LayOut />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+    ],
   },
   {
     path: "/register-owner",
@@ -22,16 +33,12 @@ export const MainRouter = createBrowserRouter([
     element: <LoginOwner />,
   },
   {
-    path: "/login",
+    path: "/login-owner",
     element: <LoginOwner />,
   },
   {
     path: "/:token/verify-account",
     element: <LoginOwner />,
-  },
-  {
-    path: "/",
-    element: <HomePage />,
   },
   {
     path: "/reset-account-password",
@@ -44,5 +51,9 @@ export const MainRouter = createBrowserRouter([
   {
     path: "/message",
     element: <MessagePage />,
+  },
+  {
+    path: "/",
+    element: <LandingPage />,
   },
 ]);

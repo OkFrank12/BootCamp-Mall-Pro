@@ -26,8 +26,8 @@ model ownerModel {
   role   String?
   roleID String? @unique
 
-  store     Json
-  createdAt DateTime @default(now())
+  store     storeModel[]
+  createdAt DateTime     @default(now())
 }
 
 model storeModel {
@@ -43,6 +43,7 @@ model storeModel {
   imageID String?
 
   ownerID String
+  owner   ownerModel @relation(fields: [ownerID], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   rating String?
 

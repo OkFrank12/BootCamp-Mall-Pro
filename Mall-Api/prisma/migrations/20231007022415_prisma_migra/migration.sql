@@ -10,7 +10,6 @@ CREATE TABLE "ownerModel" (
     "avatarID" TEXT,
     "role" TEXT,
     "roleID" TEXT,
-    "store" JSONB NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "ownerModel_pkey" PRIMARY KEY ("id")
@@ -83,3 +82,6 @@ CREATE UNIQUE INDEX "theDispatchRiderModel_roleID_key" ON "theDispatchRiderModel
 
 -- CreateIndex
 CREATE UNIQUE INDEX "theDispatchRiderModel_disID_key" ON "theDispatchRiderModel"("disID");
+
+-- AddForeignKey
+ALTER TABLE "storeModel" ADD CONSTRAINT "storeModel_ownerID_fkey" FOREIGN KEY ("ownerID") REFERENCES "ownerModel"("id") ON DELETE CASCADE ON UPDATE CASCADE;
