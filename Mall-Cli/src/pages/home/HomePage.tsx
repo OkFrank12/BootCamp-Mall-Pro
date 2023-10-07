@@ -1,7 +1,14 @@
-const HomePage = () => {
-  return (
-    <div>HomePage</div>
-  )
-}
+import { useSingleAccount } from "../../hooks/CustomHook";
 
-export default HomePage
+const HomePage = () => {
+  const { data, isLoading } = useSingleAccount();
+
+  console.log(data);
+  return (
+    <>
+      <div>{data?.owner}</div>
+    </>
+  );
+};
+
+export default HomePage;

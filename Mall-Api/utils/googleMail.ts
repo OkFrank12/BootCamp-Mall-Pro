@@ -2,9 +2,8 @@ import nodemailer from "nodemailer";
 import { google } from "googleapis";
 import path from "path";
 import ejs from "ejs";
-import jwt from "jsonwebtoken";
 
-const baseUrl: string = "http://localhost:5000";
+const baseUrl: string = "http://localhost:5173";
 
 const G_ID: string =
   "403139932252-k0ksvgd56ohc39lsckt5bt3oquahgnvb.apps.googleusercontent.com";
@@ -32,7 +31,7 @@ export const sendOwnerOpeningMail = async (account: any, token: string) => {
     });
 
     const passedData = {
-      url: `${baseUrl}/api/${token}/verify-account`,
+      url: `${baseUrl}/${token}/verify-account`,
     };
 
     const locateFile = path.join(__dirname, "../views/openingMail.ejs");

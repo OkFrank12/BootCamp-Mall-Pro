@@ -2,8 +2,11 @@ import { createBrowserRouter } from "react-router-dom";
 import LogicGate from "../pages/auth/LogicGate";
 import RegisterOwner from "../pages/auth/RegisterOwner";
 import LoginOwner from "../pages/auth/LoginOwner";
-import HomePage from "../pages/home/HomePage";
 import LandingPage from "../pages/LandingPage";
+import ResetPassword from "../pages/auth/ResetPassword";
+import ChangePassword from "../pages/auth/ChangePassword";
+import MessagePage from "../pages/auth/MessagePage";
+import HomePage from "../pages/home/HomePage";
 
 export const MainRouter = createBrowserRouter([
   {
@@ -15,11 +18,31 @@ export const MainRouter = createBrowserRouter([
     element: <RegisterOwner />,
   },
   {
-    path: "/login-owner",
+    path: "/:token/verify-account",
+    element: <LoginOwner />,
+  },
+  {
+    path: "/login",
+    element: <LoginOwner />,
+  },
+  {
+    path: "/:token/verify-account",
     element: <LoginOwner />,
   },
   {
     path: "/",
-    element: <LandingPage />,
+    element: <HomePage />,
+  },
+  {
+    path: "/reset-account-password",
+    element: <ResetPassword />,
+  },
+  {
+    path: "/change-account-password",
+    element: <ChangePassword />,
+  },
+  {
+    path: "/message",
+    element: <MessagePage />,
   },
 ]);

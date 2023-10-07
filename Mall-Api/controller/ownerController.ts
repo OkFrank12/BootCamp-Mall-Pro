@@ -36,6 +36,7 @@ export const registerOwner = async (req: Request, res: Response) => {
     return res.status(201).json({
       message: "Register Owner successfully",
       data: account,
+      signToken
     });
   } catch (error: any) {
     return res.status(404).json({
